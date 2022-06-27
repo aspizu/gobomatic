@@ -1,1 +1,89 @@
-# gobomatic
+# Gobomatic
+
+Gobomatic is a Python library to generate Scratch (3>) projects from
+Object-Oriented representation of Scratch projects in Python code.
+
+Gobomatic is still in development and does not have a stable release. Expect a
+stable release soon as Version 1.0.0
+
+## Example
+
+A build.py file is used to build the Scratch project. It also defines the Stage
+sprite.
+
+build.py
+```py
+from gobomatic import *
+
+from main import Self as main
+
+stage = Sprite(
+    "Stage",
+    costumes = [
+        "assets/blank.svg"
+    ]
+)
+
+Self = Project(
+    sprites = [
+        stage,
+        main
+    ]
+)
+
+Self.export("project.sb3", debug=True)
+```
+
+Each sprite is defined in its own Python file.
+
+main.py
+```py
+from gobomatic import *
+
+Self = Sprite(
+    name=__name__,
+    costumes = [
+        "assets/scratchcat.svg"
+    ]
+)
+
+Self.WhenFlagClicked(
+    Goto(-100, 0),
+    Glide(0, 0, 0.5),
+    Say("Hello, World!"),
+)
+```
+
+### Resulting project code
+![e](docs/assets/example-in-blocks.png)
+
+
+# Contributing
+
+You can help with the development of gobomatic by testing or writing documentation.
+
+### Installation from source
+
+clone the repository (You should fork the repository first!)
+```
+cd ~/Projects
+git clone https://github.com/aspizu/gobomatic gobomatic-git
+```
+
+install the module in edit mode
+```
+cd gobomatic-git
+pip install -e .
+```
+
+### Testing
+
+Use [examples/testing](examples/testing) to test various Scratch code.
+
+building the project
+```
+cd examples/testing
+python build.py
+```
+
+open testing.sb3 in the Scratch editor to examine the result.
