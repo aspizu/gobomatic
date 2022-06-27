@@ -1,7 +1,9 @@
 import json
 import zipfile
+import glob
 from . import code as scratchcode
 
+from typing import Union
 from .helpers import *
 
 
@@ -9,13 +11,17 @@ class Sprite:
     def __init__(
         self,
         name: str,
-        costumes: list[str] = [],
+        costumes: Union[list[str], str] = [],
         sounds: list[str] = [],
     ):
         self.name: str = name
         self.variables: list[scratchcode.Var] = []
         self.lists: list[scratchcode.List] = []
-        self.costumes: list[str] = costumes
+        self.costumes: list[str]
+        if isinstance(costumes, str):
+            self.costumes = glob.glob(costumes)
+        else:
+            self.costumes = costumes
         self.sounds: list[str] = sounds
         self.code: list = []
 
@@ -37,11 +43,26 @@ class Sprite:
         self.code.append(scratchcode.WhenFlagClicked(*code))
         return self
 
-    def Def(self, in_tuple):
-        prototype, define, call = in_tuple
-        self.code.append(prototype)
-        self.code.append(define)
-        return call
+    class Func_Class:
+        def __init__(self, sprite: "Sprite", *args: scratchcode.ArgReporter, name=None):
+            self.sprite = sprite
+            self.args = args
+            self.name = str(id(self)) if name is None else name
+            self.proccode = scratchcode.gen_proccode(self.name, self.args)
+            self.prototype = scratchcode.ProcedurePrototype(
+                self.proccode, [arg.name for arg in self.args]
+            )
+            self.sprite.code.append(self.prototype)
+
+        def Define(self, *stack):
+            self.definition = scratchcode.ProcedureDefinition(self.prototype)(*stack)
+            self.sprite.code.append(self.definition)
+
+        def __call__(self, *args):
+            return scratchcode.ProcedureCall(self.prototype, args)
+
+    def Func(self, *args, name=None):
+        return Sprite.Func_Class(self, *args, name=name)
 
     def serialize_costumes(self):
         return [

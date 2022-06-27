@@ -374,8 +374,8 @@ Arg = ArgFactory()
 
 
 class ProcedurePrototype:
-    def __init__(self, prococde: str, args: list[str]):
-        self.proccode = prococde
+    def __init__(self, proccode: str, args: list[str]):
+        self.proccode = proccode
         self.args = args
 
     def serialize(self):
@@ -436,18 +436,5 @@ class ProcedureCall(StatementBlock):
         return ret
 
 
-def Function(name, args, stack):
-    proccode = name + " " + " ".join(["%s"] * len(args))
-    prototype = ProcedurePrototype(proccode, [arg.name for arg in args])
-    define = ProcedureDefinition(prototype)(*stack)
-    call = lambda *args: ProcedureCall(prototype, args)
-    return prototype, define, call
-
-
-class Func:
-    def __init__(self, *args, name=None):
-        self.name = str(id(self)) if name is None else name
-        self.args = args
-
-    def __call__(self, *stack):
-        return Function(self.name, self.args, stack)
+def gen_proccode(name: str, args: tuple[ArgReporter, ...]) -> str:
+    return name + " " + " ".join(["%s"] * len(args))

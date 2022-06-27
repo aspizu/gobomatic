@@ -195,3 +195,13 @@ class ChangeEffectGhost(StatementBlock):
             inputs={"CHANGE": change},
             fields={"EFFECT": ["GHOST", None]},
         )
+
+
+class Hide(StatementBlock):
+    def __init__(self):
+        self.define("looks_hide")
+
+
+class Show(StatementBlock):
+    def __init__(self):
+        self.define("looks_show")

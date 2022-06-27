@@ -12,7 +12,6 @@ homepage = "https://github.com/aspizu/gobomatic"
 repository = "https://github.com/aspizu/gobomatic"
 documentation = "https://github.com/aspizu/gobomatic"
 classifiers = [
-  "Development Status :: 4 - Beta",
   "License :: OSI Approved :: MIT License",
 ]
 include = ["LICENSE", "README.md", "gobomatic/py.typed"]
