@@ -3,9 +3,6 @@
 Gobomatic is a Python library to generate Scratch (3>) projects from
 Object-Oriented representation of Scratch projects in Python code.
 
-Gobomatic is still in development and does not have a stable release. Expect a
-stable release soon as Version 1.0.0
-
 ## Example
 
 A build.py file is used to build the Scratch project. It also defines the Stage
