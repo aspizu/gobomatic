@@ -5,10 +5,11 @@ from .operator import *
 from .sensing import *
 from .sound import *
 from .pen import *
+from .scratchaddons import *
 
 
 class WhenFlagClicked(HatBlock):
-    def __init__(self, *stack):
+    def __init__(self, *stack: StatementBlock):
         self.define("event_whenflagclicked", {}, {})
         self(*stack)
 
@@ -19,7 +20,7 @@ class WhenKeyPressed(HatBlock):
 
 
 class WhenThisSpriteClicked(HatBlock):
-    def __init__(self, *stack):
+    def __init__(self, *stack: StatementBlock):
         self.define("event_whenthisspriteclicked", {}, {})
         self(*stack)
 
@@ -46,10 +47,10 @@ def WhenTimerGreaterThan(time: InputType):
     return WhenGreaterThan("TIMER", time)
 
 
-class WhenRecieved(HatBlock):
-    def __init__(self, event: str, value: InputType):
+class WhenReceived(HatBlock):
+    def __init__(self, event: str):
         self.define(
-            "event_whenbroadcastrecieved",
+            "event_whenbroadcastreceived",
             inputs={},
             fields={"BROADCAST_OPTION": [event, event]},
         )
@@ -91,7 +92,7 @@ class DeleteThisClone(StatementBlock):
 
 class Stop(StatementBlock):
     def __init__(self, operation: str):
-        self.define("control_stop", fields={"STOP_OPERATION": [operation, None]})
+        self.define("control_stop", fields={"STOP_OPTION": [operation, None]})
 
 
 def StopAll():
@@ -110,11 +111,11 @@ class If(StatementBlock):
     def __init__(self, condition: BooleanType):
         self.define("control_if", inputs={"CONDITION": condition})
 
-    def __call__(self, *if_stack):
+    def __call__(self, *if_stack: StatementBlock):
         self.inputs["SUBSTACK"] = StatementStack(if_stack)
         return self
 
-    def Else(self, *else_stack):
+    def Else(self, *else_stack: StatementBlock):
         self.opcode = "control_if_else"
         self.inputs["SUBSTACK2"] = StatementStack(else_stack)
         return self
@@ -124,7 +125,7 @@ class Until(StatementBlock):
     def __init__(self, condition: BooleanType):
         self.define("control_repeat_until", inputs={"CONDITION": condition})
 
-    def __call__(self, *stack):
+    def __call__(self, *stack: StatementBlock):
         self.inputs["SUBSTACK"] = StatementStack(stack)
         return self
 
@@ -133,12 +134,11 @@ class Repeat(StatementBlock):
     def __init__(self, times: InputType):
         self.define("control_repeat", inputs={"TIMES": times})
 
-    def __call__(self, *stack):
+    def __call__(self, *stack: StatementBlock):
         self.inputs["SUBSTACK"] = StatementStack(stack)
         return self
 
 
 class Forever(StatementBlock):
-    def __init__(self, *stack):
+    def __init__(self, *stack: StatementBlock):
         self.define("control_forever", inputs={"SUBSTACK": StatementStack(stack)})
-

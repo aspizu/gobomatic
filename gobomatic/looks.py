@@ -66,6 +66,18 @@ class CostumeName(ReporterBlock):
         self.define("looks_costumenumbername", fields={"NUMBER_NAME": ["name", None]})
 
 
+class BackdropNumber(ReporterBlock):
+    def __init__(self):
+        self.define(
+            "looks_backdropnumbername", fields={"NUMBER_NAME": ["number", None]}
+        )
+
+
+class BackdropName(ReporterBlock):
+    def __init__(self):
+        self.define("looks_backdropnumbername", fields={"NUMBER_NAME": ["name", None]})
+
+
 class Size(ReporterBlock):
     def __init__(self):
         self.define("looks_size")
@@ -205,3 +217,35 @@ class Hide(StatementBlock):
 class Show(StatementBlock):
     def __init__(self):
         self.define("looks_show")
+
+
+class GotoFrontBack(StatementBlock):
+    def __init__(self, front_back: str):
+        self.define("looks_gotofrontback", fields={"FRONT_BACK": [front_back, None]})
+
+
+def GotoFront():
+    return GotoFrontBack("front")
+
+
+def GotoBack():
+    return GotoFrontBack("back")
+
+
+class GoForwardBackwardLayers(StatementBlock):
+    def __init__(self, forward_backward: str, layers: InputType):
+        self.define(
+            "looks_goforwardbackwardlayers",
+            inputs={
+                "NUM": layers,
+            },
+            fields={"FORWARD_BACKWARD": [forward_backward, None]},
+        )
+
+
+def GoForward(layers: InputType):
+    return GoForwardBackwardLayers("forward", layers)
+
+
+def GoBackward(layers: InputType):
+    return GoForwardBackwardLayers("backward", layers)

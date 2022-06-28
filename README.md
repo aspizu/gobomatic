@@ -58,6 +58,9 @@ Self.WhenFlagClicked(
 ![e](docs/assets/example-in-blocks.png)
 
 
+## Documentation
+[~/docs/docs.md](docs/docs.md)
+
 # Contributing
 
 You can help with the development of gobomatic by testing or writing documentation.
@@ -78,7 +81,7 @@ pip install -e .
 
 ### Testing
 
-Use [examples/testing](examples/testing) to test various Scratch code.
+Use [~/examples/testing](examples/testing) to test various Scratch code.
 
 building the project
 ```

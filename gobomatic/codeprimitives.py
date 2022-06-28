@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Any, Iterable
 from . import code
 import json
 
@@ -20,12 +20,12 @@ def serialize_block_inputs(inputs):
 
 
 class HatBlock:
-    def define(self, opcode, inputs, fields):
+    def define(self, opcode: str, inputs: dict[str, Any], fields: dict[str, Any]):
         self.opcode = opcode
         self.inputs = inputs
         self.fields = fields
 
-    def __call__(self, *stack):
+    def __call__(self, *stack: "StatementBlock"):
         self.stack = StatementStack(stack)
         return self
 
@@ -57,8 +57,8 @@ class Block:
 
 
 class StatementStack:
-    def __init__(self, stack):
-        self.stack = stack
+    def __init__(self, stack: tuple["StatementBlock", ...]):
+        self.stack: tuple[StatementBlock, ...] = stack
 
     def serialize(self, parent_id):
         ret = []
@@ -151,9 +151,14 @@ BooleanType = Union[
     "code.Eq",
     "code.Gt",
     "code.Lt",
+    "code.And",
+    "code.Or",
     "code.ListContainsItem",
     "code.ColorTouchingColor",
     "code.Touching",
+    "code.TouchingColor",
+    "code.KeyPressed",
+    "code.MouseDown",
 ]
 
 
@@ -306,7 +311,7 @@ class DeleteAllOfList(StatementBlock):
 class InsertAtList(StatementBlock):
     def __init__(self, list_: List, index: InputType, item: InputType):
         self.define(
-            "data_deleteoflist",
+            "data_insertatlist",
             inputs={"INDEX": index, "ITEM": item},
             fields={"LIST": list_.field()},
         )
@@ -412,7 +417,7 @@ class ProcedureDefinition(HatBlock):
 
 
 class ProcedureCall(StatementBlock):
-    def __init__(self, prototype: ProcedurePrototype, args: list[InputType]):
+    def __init__(self, prototype: ProcedurePrototype, args: tuple[InputType, ...]):
         self.prototype = prototype
         self.define(
             "procedures_call",

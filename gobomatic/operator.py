@@ -97,57 +97,57 @@ class MathOp(ReporterBlock):
         )
 
 
-def Abs(operand: InputType):
+def Abs(operand: InputType) -> ReporterBlock:
     return MathOp("abs", operand)
 
 
-def Floor(operand: InputType):
+def Floor(operand: InputType) -> ReporterBlock:
     return MathOp("floor", operand)
 
 
-def Ceiling(operand: InputType):
+def Ceiling(operand: InputType) -> ReporterBlock:
     return MathOp("ceiling", operand)
 
 
-def Sqrt(operand: InputType):
+def Sqrt(operand: InputType) -> ReporterBlock:
     return MathOp("sqrt", operand)
 
 
-def Sin(operand: InputType):
+def Sin(operand: InputType) -> ReporterBlock:
     return MathOp("sin", operand)
 
 
-def Cos(operand: InputType):
+def Cos(operand: InputType) -> ReporterBlock:
     return MathOp("cos", operand)
 
 
-def Tan(operand: InputType):
+def Tan(operand: InputType) -> ReporterBlock:
     return MathOp("tan", operand)
 
 
-def Asin(operand: InputType):
+def Asin(operand: InputType) -> ReporterBlock:
     return MathOp("asin", operand)
 
 
-def Acos(operand: InputType):
+def Acos(operand: InputType) -> ReporterBlock:
     return MathOp("acos", operand)
 
 
-def Atan(operand: InputType):
+def Atan(operand: InputType) -> ReporterBlock:
     return MathOp("atan", operand)
 
 
-def Ln(operand: InputType):
+def Ln(operand: InputType) -> ReporterBlock:
     return MathOp("ln", operand)
 
 
-def Log(operand: InputType):
+def Log(operand: InputType) -> ReporterBlock:
     return MathOp("log", operand)
 
 
-def AntiLn(operand: InputType):
+def AntiLn(operand: InputType) -> ReporterBlock:
     return MathOp("e ^", operand)
 
 
-def AntiLog(operand: InputType):
+def AntiLog(operand: InputType) -> ReporterBlock:
     return MathOp("10 ^", operand)

@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "gobomatic"
-version = "1.0.0"
+version = "1.1.0"
 description = "Gobomatic is a Python library to generate Scratch (3>) projects from Object-Oriented representation of Scratch projects in Python code."
 authors = ["aspizu <aspizu@protonmail.com>"]
 maintainers = ["aspizu <aspizu@protonmail.com>"]

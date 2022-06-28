@@ -35,12 +35,41 @@ class Sprite:
         self.lists.append(list_)
         return list_
 
-    def Code(self, *code):
-        self.code: list = code
+    def Code(self, *code: Union[scratchcode.StatementBlock, scratchcode.HatBlock]):
+        self.code.extend(code)
         return self
 
-    def WhenFlagClicked(self, *code):
-        self.code.append(scratchcode.WhenFlagClicked(*code))
+    def WhenFlagClicked(self, *code: scratchcode.StatementBlock):
+        self.Code(scratchcode.WhenFlagClicked(*code))
+        return self
+
+    def WhenKeyPressed(self, key: str):
+        block = scratchcode.WhenKeyPressed(key)
+        self.Code(block)
+        return block
+
+    def WhenBackdropSwitchesTo(self, backdrop: str):
+        block = scratchcode.WhenBackdropSwitchesTo(backdrop)
+        self.Code(block)
+        return block
+
+    def WhenLoudnessGreaterThan(self, loudness: scratchcode.InputType):
+        block = scratchcode.WhenLoudnessGreaterThan(loudness)
+        self.Code(block)
+        return block
+
+    def WhenTimerGreaterThan(self, timer: scratchcode.InputType):
+        block = scratchcode.WhenTimerGreaterThan(timer)
+        self.Code(block)
+        return block
+
+    def WhenReceived(self, event: str):
+        block = scratchcode.WhenReceived(event)
+        self.Code(block)
+        return block
+
+    def WhenThisSpriteClicked(self, *code: scratchcode.StatementBlock):
+        self.Code(scratchcode.WhenThisSpriteClicked(*code))
         return self
 
     class Func_Class:
@@ -54,14 +83,20 @@ class Sprite:
             )
             self.sprite.code.append(self.prototype)
 
-        def Define(self, *stack):
+        def Define(self, *stack: scratchcode.StatementBlock):
             self.definition = scratchcode.ProcedureDefinition(self.prototype)(*stack)
             self.sprite.code.append(self.definition)
 
-        def __call__(self, *args):
+        def __call__(self, *args: scratchcode.InputType):
+            if len(args) != len(self.args):
+                raise Exception(
+                    f'Call to function "{self.name}" with {len(args)} arguments'
+                )
             return scratchcode.ProcedureCall(self.prototype, args)
 
-    def Func(self, *args, name=None):
+    def Func(
+        self, *args: scratchcode.ArgReporter, name: str = None
+    ) -> "Sprite.Func_Class":
         return Sprite.Func_Class(self, *args, name=name)
 
     def serialize_costumes(self):

@@ -25,7 +25,7 @@ class ResetTimer(StatementBlock):
 
 class Touching(ReporterBlock):
     def __init__(self, sprite: InputType):
-        self.define("sensing_touchingobject")
+        self.define("sensing_touchingobject", inputs={"TOUCHINGOBJECTMENU": sprite})
 
 
 def TouchingMousePointer():
@@ -97,31 +97,31 @@ class Current(ReporterBlock):
         self.define("sensing_current", fields={"CURRENTMENU": [time_property, None]})
 
 
-def CurrentYear():
+def CurrentYear() -> ReporterBlock:
     return Current("YEAR")
 
 
-def CurrentMonth():
+def CurrentMonth() -> ReporterBlock:
     return Current("MONTH")
 
 
-def CurrentDate():
+def CurrentDate() -> ReporterBlock:
     return Current("DATE")
 
 
-def CurrentDayofweek():
+def CurrentDayofweek() -> ReporterBlock:
     return Current("DAYOFWEEK")
 
 
-def CurrentHour():
+def CurrentHour() -> ReporterBlock:
     return Current("HOUR")
 
 
-def CurrentMinute():
+def CurrentMinute() -> ReporterBlock:
     return Current("MINUTE")
 
 
-def CurrentSecond():
+def CurrentSecond() -> ReporterBlock:
     return Current("SECOND")
 
 

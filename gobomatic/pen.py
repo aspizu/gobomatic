@@ -50,33 +50,33 @@ class SetPenSize(StatementBlock):
         self.define("pen_setPenSizeTo", inputs={"SIZE": size})
 
 
-def ChangePenColor(change: InputType):
+def ChangePenHue(change: InputType) -> StatementBlock:
     return ChangePenColorParam("color", change)
 
 
-def ChangePenSaturation(change: InputType):
+def ChangePenSaturation(change: InputType) -> StatementBlock:
     return ChangePenColorParam("saturation", change)
 
 
-def ChangePenBrightness(change: InputType):
+def ChangePenBrightness(change: InputType) -> StatementBlock:
     return ChangePenColorParam("brightness", change)
 
 
-def ChangePenTransparency(change: InputType):
+def ChangePenTransparency(change: InputType) -> StatementBlock:
     return ChangePenColorParam("transparency", change)
 
 
-def SetPenHue(change: InputType):
+def SetPenHue(change: InputType) -> StatementBlock:
     return SetPenColorParam("color", change)
 
 
-def SetPenSaturation(change: InputType):
+def SetPenSaturation(change: InputType) -> StatementBlock:
     return SetPenColorParam("saturation", change)
 
 
-def SetPenBrightness(change: InputType):
+def SetPenBrightness(change: InputType) -> StatementBlock:
     return SetPenColorParam("brightness", change)
 
 
-def SetPenTransparency(change: InputType):
+def SetPenTransparency(change: InputType) -> StatementBlock:
     return SetPenColorParam("transparency", change)

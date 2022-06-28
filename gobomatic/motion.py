@@ -34,6 +34,19 @@ class Goto(StatementBlock):
         self.define("motion_gotoxy", inputs={"X": x, "Y": y})
 
 
+class GlideToSprite(StatementBlock):
+    def __init__(self, sprite: InputType, time: InputType):
+        self.define("motion_glideto", inputs={"SECS": time, "TO": sprite})
+
+
+def GlideToMousePointer(time: InputType):
+    return GlideToSprite("_mouse_", time)
+
+
+def GlideToRandomPosition(time: InputType):
+    return GlideToSprite("_random_", time)
+
+
 class Glide(StatementBlock):
     def __init__(self, x: InputType, y: InputType, time: InputType):
         self.define("motion_glidesecstoxy", inputs={"SECS": time, "X": x, "Y": y})
@@ -42,6 +55,15 @@ class Glide(StatementBlock):
 class Point(StatementBlock):
     def __init__(self, direction: InputType):
         self.define("motion_pointindirection", inputs={"DIRECTION": direction})
+
+
+class PointTowards(StatementBlock):
+    def __init__(self, sprite: InputType):
+        self.define("motion_pointtowards", inputs={"TOWARDS": sprite})
+
+
+def PointTowardsMousePointer():
+    return PointTowards("_mouse_")
 
 
 class ChangeX(StatementBlock):
