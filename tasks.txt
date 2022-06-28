@@ -1,0 +1,3 @@
+# Overload operators __and__ __or__ __invert__ to And() Or() Not()
+
+# Convert non-boolean inputs to check for truthy values for boolean inputs
