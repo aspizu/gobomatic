@@ -1,4 +1,4 @@
-from .codeprimitives import *
+from ..primitives import StatementBlock, ReporterBlock, InputType
 
 
 class PlaySoundUntilDone(StatementBlock):
@@ -16,40 +16,38 @@ class StopAllSounds(StatementBlock):
         self.define("sound_stopallsounds")
 
 
-class ChangePitchEffect(StatementBlock):
-    def __init__(self, change: InputType):
-        self.define(
-            "sound_changeeffectby",
-            inputs={"VALUE": change},
-            fields={"EFFECT": ["PITCH", None]},
-        )
-
-
-class ChangePanEffect(StatementBlock):
-    def __init__(self, change: InputType):
-        self.define(
-            "sound_changeeffectby",
-            inputs={"VALUE": change},
-            fields={"EFFECT": ["PAN", None]},
-        )
-
-
-class SetPitchEffect(StatementBlock):
-    def __init__(self, pitch: InputType):
+class SetSoundEffect(StatementBlock):
+    def __init__(self, effect: str, value: InputType):
         self.define(
             "sound_seteffectto",
-            inputs={"VALUE": pitch},
-            fields={"EFFECT": ["PITCH", None]},
+            inputs={"VALUE": value},
+            fields={"EFFECT": effect},
         )
 
 
-class SetPanEffect(StatementBlock):
-    def __init__(self, pan: InputType):
+class ChangeSoundEffect(StatementBlock):
+    def __init__(self, effect: str, value: InputType):
         self.define(
-            "sound_seteffectto",
-            inputs={"VALUE": pan},
-            fields={"EFFECT": ["PAN", None]},
+            "sound_changeeffectby",
+            inputs={"VALUE": value},
+            fields={"EFFECT": effect},
         )
+
+
+def SetPitchEffect(value: InputType) -> StatementBlock:
+    return SetSoundEffect("PITCH", value)
+
+
+def ChangePitchEffect(value: InputType) -> StatementBlock:
+    return ChangeSoundEffect("PITCH", value)
+
+
+def SetPanEffect(value: InputType) -> StatementBlock:
+    return SetSoundEffect("PAN", value)
+
+
+def ChangePanEffect(value: InputType) -> StatementBlock:
+    return ChangeSoundEffect("PAN", value)
 
 
 class ClearSoundEffects(StatementBlock):

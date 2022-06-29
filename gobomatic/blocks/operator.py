@@ -1,4 +1,4 @@
-from .codeprimitives import *
+from ..primitives import ReporterBlock, BooleanReporterBlock, InputType
 
 
 class Add(ReporterBlock):
@@ -26,33 +26,33 @@ class Random(ReporterBlock):
         self.define("operator_random", inputs={"FROM": lower, "TO": upper})
 
 
-class Gt(ReporterBlock):
+class Gt(BooleanReporterBlock):
     def __init__(self, left: InputType, right: InputType):
         self.define("operator_gt", inputs={"OPERAND1": left, "OPERAND2": right})
 
 
-class Lt(ReporterBlock):
+class Lt(BooleanReporterBlock):
     def __init__(self, left: InputType, right: InputType):
         self.define("operator_lt", inputs={"OPERAND1": left, "OPERAND2": right})
 
 
-class Eq(ReporterBlock):
+class Eq(BooleanReporterBlock):
     def __init__(self, left: InputType, right: InputType):
         self.define("operator_equals", inputs={"OPERAND1": left, "OPERAND2": right})
 
 
-class And(ReporterBlock):
-    def __init__(self, left: InputType, right: InputType):
+class And(BooleanReporterBlock):
+    def __init__(self, left: BooleanReporterBlock, right: BooleanReporterBlock):
         self.define("operator_and", inputs={"OPERAND1": left, "OPERAND2": right})
 
 
-class Or(ReporterBlock):
-    def __init__(self, left: InputType, right: InputType):
+class Or(BooleanReporterBlock):
+    def __init__(self, left: BooleanReporterBlock, right: BooleanReporterBlock):
         self.define("operator_or", inputs={"OPERAND1": left, "OPERAND2": right})
 
 
-class Not(ReporterBlock):
-    def __init__(self, operand: InputType):
+class Not(BooleanReporterBlock):
+    def __init__(self, operand: BooleanReporterBlock):
         self.define("operator_not", inputs={"OPERAND": operand})
 
 
@@ -71,7 +71,7 @@ class Length(ReporterBlock):
         self.define("operator_length", inputs={"STRING": string})
 
 
-class Contains(ReporterBlock):
+class Contains(BooleanReporterBlock):
     def __init__(self, string: InputType, substring: InputType):
         self.define(
             "operator_contains", inputs={"STRING1": string, "STRING2": substring}
@@ -93,7 +93,7 @@ class MathOp(ReporterBlock):
         self.define(
             "operator_mathop",
             inputs={"NUM": operand},
-            fields={"OPERATOR": [operator, None]},
+            fields={"OPERATOR": operator},
         )
 
 

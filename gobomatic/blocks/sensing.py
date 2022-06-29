@@ -1,4 +1,4 @@
-from .codeprimitives import *
+from ..primitives import StatementBlock, ReporterBlock, BooleanReporterBlock, InputType
 
 
 class Ask(StatementBlock):
@@ -8,14 +8,12 @@ class Ask(StatementBlock):
 
 class SetDraggable(StatementBlock):
     def __init__(self):
-        self.define("sensing_setdragmode", fields={"DRAG_MODE": ["draggable", None]})
+        self.define("sensing_setdragmode", fields={"DRAG_MODE": "draggable"})
 
 
 class SetNotDraggable(StatementBlock):
     def __init__(self):
-        self.define(
-            "sensing_setdragmode", fields={"DRAG_MODE": ["not draggable", None]}
-        )
+        self.define("sensing_setdragmode", fields={"DRAG_MODE": "not draggable"})
 
 
 class ResetTimer(StatementBlock):
@@ -23,28 +21,29 @@ class ResetTimer(StatementBlock):
         self.define("sensing_resettimer")
 
 
-class Touching(ReporterBlock):
+class Touching(BooleanReporterBlock):
     def __init__(self, sprite: InputType):
         self.define("sensing_touchingobject", inputs={"TOUCHINGOBJECTMENU": sprite})
 
 
-def TouchingMousePointer():
+def TouchingMousePointer() -> BooleanReporterBlock:
     return Touching("_mouse_")
 
 
-def TouchingEdge():
+def TouchingEdge() -> BooleanReporterBlock:
     return Touching("_edge_")
 
 
-class TouchingColor(ReporterBlock):
+class TouchingColor(BooleanReporterBlock):
     def __init__(self, color: InputType):
         self.define("sensing_touchingcolor", inputs={"COLOR": color})
 
 
-class ColorTouchingColor(ReporterBlock):
+class ColorTouchingColor(BooleanReporterBlock):
     def __init__(self, color1: InputType, color2: InputType):
         self.define(
-            "sensing_coloristouchingcolor", inputs={"COLOR": color1, "COLOR2": color2}
+            "sensing_coloristouchingcolor",
+            inputs={"COLOR": color1, "COLOR2": color2},
         )
 
 
@@ -62,12 +61,12 @@ class Answer(ReporterBlock):
         self.define("sensing_answer")
 
 
-class KeyPressed(ReporterBlock):
+class KeyPressed(BooleanReporterBlock):
     def __init__(self, key: InputType):
         self.define("sensing_keypressed", inputs={"KEY_OPTION": key})
 
 
-class MouseDown(ReporterBlock):
+class MouseDown(BooleanReporterBlock):
     def __init__(self):
         self.define("sensing_mousedown")
 
@@ -94,7 +93,7 @@ class Timer(ReporterBlock):
 
 class Current(ReporterBlock):
     def __init__(self, time_property: str):
-        self.define("sensing_current", fields={"CURRENTMENU": [time_property, None]})
+        self.define("sensing_current", fields={"CURRENTMENU": time_property})
 
 
 def CurrentYear() -> ReporterBlock:

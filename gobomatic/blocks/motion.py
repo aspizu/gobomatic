@@ -1,4 +1,4 @@
-from .codeprimitives import *
+from ..primitives import StatementBlock, ReporterBlock, InputType
 
 
 class Move(StatementBlock):
@@ -21,11 +21,11 @@ class GotoSprite(StatementBlock):
         self.define("motion_goto", inputs={"TO": sprite})
 
 
-def GotoMousePointer():
+def GotoMousePointer() -> StatementBlock:
     return GotoSprite("_mouse_")
 
 
-def GotoRandomPosition():
+def GotoRandomPosition() -> StatementBlock:
     return GotoSprite("_random_")
 
 
@@ -39,11 +39,11 @@ class GlideToSprite(StatementBlock):
         self.define("motion_glideto", inputs={"SECS": time, "TO": sprite})
 
 
-def GlideToMousePointer(time: InputType):
+def GlideToMousePointer(time: InputType) -> StatementBlock:
     return GlideToSprite("_mouse_", time)
 
 
-def GlideToRandomPosition(time: InputType):
+def GlideToRandomPosition(time: InputType) -> StatementBlock:
     return GlideToSprite("_random_", time)
 
 
@@ -62,7 +62,7 @@ class PointTowards(StatementBlock):
         self.define("motion_pointtowards", inputs={"TOWARDS": sprite})
 
 
-def PointTowardsMousePointer():
+def PointTowardsMousePointer() -> StatementBlock:
     return PointTowards("_mouse_")
 
 
@@ -93,18 +93,18 @@ class IfOnEdgeBounce(StatementBlock):
 
 class SetRotationStyle(StatementBlock):
     def __init__(self, style: str):
-        self.define("motion_setrotationstyle", fields={"STYLE": [style, None]})
+        self.define("motion_setrotationstyle", fields={"STYLE": style})
 
 
-def SetRotationStyleLeftRight():
+def SetRotationStyleLeftRight() -> StatementBlock:
     return SetRotationStyle("left-right")
 
 
-def SetRotationStyleAllAround():
+def SetRotationStyleAllAround() -> StatementBlock:
     return SetRotationStyle("all around")
 
 
-def SetRotationStyleDontRotate():
+def SetRotationStyleDontRotate() -> StatementBlock:
     return SetRotationStyle("don't rotate")
 
 

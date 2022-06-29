@@ -2,7 +2,7 @@
 
 from gobomatic import *
 
-Self = Sprite(name=__name__, costumes="assets/*")
+Self = Sprite(name=__name__, costumes=["assets/scratchcat.svg"])
 
 # Variables:
 # --- for all sprites variables ---
@@ -67,20 +67,20 @@ Self.WhenFlagClicked(
     NextBackdrop(),
     ChangeSize(10),
     SetSize(100),
-    ChangeEffectColor(25),
-    ChangeEffectFisheye(25),
-    ChangeEffectWhirl(25),
-    ChangeEffectPixelate(25),
-    ChangeEffectMosaic(25),
-    ChangeEffectBrightness(25),
-    ChangeEffectGhost(25),
-    SetEffectColor(0),
-    SetEffectFisheye(0),
-    SetEffectWhirl(0),
-    SetEffectPixelate(0),
-    SetEffectMosaic(0),
-    SetEffectBrightness(0),
-    SetEffectGhost(0),
+    ChangeColorEffect(25),
+    ChangeFisheyeEffect(25),
+    ChangeWhirlEffect(25),
+    ChangePixelateEffect(25),
+    ChangeMosaicEffect(25),
+    ChangeBrightnessEffect(25),
+    ChangeGhostEffect(25),
+    SetColorEffect(0),
+    SetFisheyeEffect(0),
+    SetWhirlEffect(0),
+    SetPixelateEffect(0),
+    SetMosaicEffect(0),
+    SetBrightnessEffect(0),
+    SetGhostEffect(0),
     ClearGraphicEffects(),
     Show(),
     Hide(),
@@ -233,8 +233,8 @@ Self.WhenFlagClicked(
 )
 
 Self.WhenFlagClicked(
-    GLOBAL_VARIABLE <= 0, # Set variable to 0
-    GLOBAL_VARIABLE >= 1, # Change variable by 1
+    GLOBAL_VARIABLE.set(0), # Set variable to 0
+    GLOBAL_VARIABLE.change(1), # Change variable by 1
     local_variable.show(),
     local_variable.hide(),
     GLOBAL_LIST.add("thing"),

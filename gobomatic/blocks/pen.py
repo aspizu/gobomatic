@@ -1,4 +1,4 @@
-from .codeprimitives import *
+from ..primitives import StatementBlock, InputType
 
 
 class EraseAll(StatementBlock):
@@ -66,17 +66,17 @@ def ChangePenTransparency(change: InputType) -> StatementBlock:
     return ChangePenColorParam("transparency", change)
 
 
-def SetPenHue(change: InputType) -> StatementBlock:
-    return SetPenColorParam("color", change)
+def SetPenHue(value: InputType) -> StatementBlock:
+    return SetPenColorParam("color", value)
 
 
-def SetPenSaturation(change: InputType) -> StatementBlock:
-    return SetPenColorParam("saturation", change)
+def SetPenSaturation(value: InputType) -> StatementBlock:
+    return SetPenColorParam("saturation", value)
 
 
-def SetPenBrightness(change: InputType) -> StatementBlock:
-    return SetPenColorParam("brightness", change)
+def SetPenBrightness(value: InputType) -> StatementBlock:
+    return SetPenColorParam("brightness", value)
 
 
-def SetPenTransparency(change: InputType) -> StatementBlock:
-    return SetPenColorParam("transparency", change)
+def SetPenTransparency(value: InputType) -> StatementBlock:
+    return SetPenColorParam("transparency", value)
