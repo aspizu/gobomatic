@@ -58,7 +58,7 @@ Self.WhenFlagClicked(
 ## Documentation
 [~/docs/docs.md](docs/docs.md)
 
-# Contributing
+## Contributing
 
 You can help with the development of gobomatic by testing or writing documentation.
 
@@ -88,6 +88,6 @@ python build.py
 
 open testing.sb3 in the Scratch editor to examine the result.
 
-### Mentions
+## Mentions
 
 Thanks to [@DavidBuchanan314](https://github.com/DavidBuchanan314), They too are working on a similar project but with different goals [boiga](https://github.com/DavidBuchanan314/boiga) which was the inspiration for this project.
