@@ -87,3 +87,7 @@ python build.py
 ```
 
 open testing.sb3 in the Scratch editor to examine the result.
+
+### Mentions
+
+Thanks to [@DavidBuchanan314](https://github.com/DavidBuchanan314), They too are working on a similar project but with different goals [boiga](https://github.com/DavidBuchanan314/boiga) which was the inspiration for this project.
