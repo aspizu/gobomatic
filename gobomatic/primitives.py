@@ -203,7 +203,8 @@ class Block:
             [
                 block.serialize(parent_id=self.id)
                 for block in self.inputs.values()
-                if isinstance(block, (Block, Stack)) and not isinstance(block, ProcPrototype)
+                if isinstance(block, (Block, Stack))
+                and not isinstance(block, ProcPrototype)
             ],
         ]
 

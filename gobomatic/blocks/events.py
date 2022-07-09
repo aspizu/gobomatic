@@ -1,6 +1,12 @@
 from ..primitives import HatBlock, StatementBlock, InputType
 
 
+class WhenStartAsClone(HatBlock):
+    def __init__(self, stack: tuple[StatementBlock, ...]):
+        self.define("control_start_as_clone")
+        self(*stack)
+
+
 class WhenFlagClicked(HatBlock):
     def __init__(self, stack: tuple[StatementBlock, ...]):
         self.define("event_whenflagclicked")
