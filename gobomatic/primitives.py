@@ -309,8 +309,9 @@ class ProcPrototype(Block):
             "tagName": "mutation",
             "children": [],
             "proccode": self.proccode,
-            "argumentids": json.dumps(self.args),  # FIXME
-            "argumentnames": json.dumps(self.args),  # FIXME
+            "argumentids": json.dumps(self.args),
+            "argumentdefaults": json.dumps([0] * len(self.args)),
+            "argumentnames": json.dumps(self.args),
             "warp": "true",
         }
         return ret

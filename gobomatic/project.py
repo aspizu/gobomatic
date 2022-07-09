@@ -189,6 +189,6 @@ class Project:
         if debug:
             from rich import print
 
-            print(project_json)
+            print(json.dumps(project_json, indent=2))
         sb3.writestr("project.json", json.dumps(project_json))
         return self
