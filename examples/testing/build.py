@@ -6,4 +6,4 @@ stage = Sprite("Stage", costumes=["assets/blank.svg"])
 
 Self = Project(sprites=[stage, main])
 
-Self.export("project.sb3")
+Self.export("testing_build.sb3")

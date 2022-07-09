@@ -161,6 +161,9 @@ class Sprite:
             "sounds": sounds(),
         }
 
+    def __repr__(self):
+        return f"Sprite(name={self.name!r}, costumes={self.costumes!r}, sounds={self.sounds!r}, blocks={self.blocks!r})"
+
 
 class Project:
     def __init__(self, sprites: list[Sprite]):
@@ -192,3 +195,6 @@ class Project:
             print(json.dumps(project_json, indent=2))
         sb3.writestr("project.json", json.dumps(project_json))
         return self
+
+    def __repr__(self):
+        return f"Project(sprites={self.sprites!r})"

@@ -82,6 +82,9 @@ class Var:
 
         return Gt(self, o)
 
+    def __repr__(self):
+        return f"Var(name={self.name!r}, value={self.value!r})"
+
 
 class List:
     def __init__(self, name: str = None, values: list[ValueType] = None):
@@ -143,6 +146,9 @@ class List:
         from .blocks.otherblocks import ItemOfList
 
         return ItemOfList(self, index)
+
+    def __repr__(self):
+        return f"List(name={self.name!r}, values={self.values!r})"
 
 
 class Block:
@@ -208,6 +214,11 @@ class Block:
             ],
         ]
 
+    def __repr__(self):
+        return (
+            f"{self.__class__.__name__}(inputs={self.inputs!r}, fields={self.fields!r})"
+        )
+
 
 class Stack(list):
     def serialize(self, parent_id):
@@ -218,6 +229,9 @@ class Stack(list):
             )
             for i, block in enumerate(self)
         ]
+
+    def __repr__(self):
+        return super().__repr__()[1:-1]
 
 
 class StatementBlock(Block):
@@ -234,6 +248,9 @@ class HatBlock(Block):
         ret[0]["next"] = self.stack[0].id
         ret.append(self.stack.serialize(self.id))
         return ret
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.stack!r})"
 
 
 class ReporterBlock(Block):

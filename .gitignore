@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 
 .vscode/ 
+
+# Scratch Projects
+*_build.sb3
