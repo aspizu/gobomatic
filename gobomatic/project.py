@@ -80,6 +80,10 @@ class Sprite:
         self.lists.append(lst)
         return lst
 
+    def WhenStartAsClone(self, *stack: primitives.StatementBlock):
+        self.blocks.append(events.WhenStartAsClone(stack))
+        return self
+
     def WhenFlagClicked(self, *stack: primitives.StatementBlock):
         self.blocks.append(events.WhenFlagClicked(stack))
         return self
