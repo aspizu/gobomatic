@@ -32,11 +32,11 @@ class Sprite:
             self,
             sprite: "Sprite",
             args: tuple[primitives.ArgReporter, ...],
-            name: str,
+            name: str = None,
         ):
             self.sprite = sprite
             self.args_length = len(args)
-            proccode = primitives.genproccode(name, args)
+            proccode = primitives.genproccode(name or primitives.blkid(self), args)
             self.prototype = primitives.ProcPrototype(
                 proccode, [arg.name for arg in args]
             )
@@ -65,16 +65,18 @@ class Sprite:
         self.lists: list[primitives.List] = []
         self.blocks: list[primitives.Block] = []
 
-    def Func(self, *args: primitives.ArgReporter, name: str) -> "Sprite.FuncFactory":
+    def Func(
+        self, *args: primitives.ArgReporter, name: str = None
+    ) -> "Sprite.FuncFactory":
         return Sprite.FuncFactory(self, args, name)
 
-    def Var(self, name: str, value: primitives.ValueType = 0) -> primitives.Var:
+    def Var(self, name: str = None, value: primitives.ValueType = 0) -> primitives.Var:
         var = primitives.Var(name, value)
         self.variables.append(var)
         return var
 
     def List(
-        self, name: str, values: list[primitives.ValueType] = None
+        self, name: str = None, values: list[primitives.ValueType] = None
     ) -> primitives.List:
         lst = primitives.List(name, values)
         self.lists.append(lst)

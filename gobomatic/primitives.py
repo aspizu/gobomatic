@@ -20,9 +20,9 @@ def ValueType_to_str(a: ValueType) -> str:
 
 
 class Var:
-    def __init__(self, name: str, value: ValueType = 0):
+    def __init__(self, name: str = None, value: ValueType = 0):
         self.id = blkid(self)
-        self.name: str = name
+        self.name: str = name or self.id
         self.value: str = ValueType_to_str(value)
 
     def set(self, value: InputType):
@@ -84,9 +84,9 @@ class Var:
 
 
 class List:
-    def __init__(self, name: str, values: list[ValueType] = None):
+    def __init__(self, name: str = None, values: list[ValueType] = None):
         self.id = blkid(self)
-        self.name: str = name
+        self.name: str = name or self.id
         self.values: list[str] = [ValueType_to_str(a) for a in values or []]
 
     def add(self, item: InputType):
