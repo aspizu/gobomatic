@@ -1,3 +1,14 @@
+## NEW
+
+[Goboscript](https://github.com/aspizu/goboscript) is a new way to write Scratch 
+Projects in text form. When it reaches a stable release you may use it over 
+Gobomatic. Goboscript depends on Gobomatic so development will continue on both 
+projects.
+
+<br>
+<br>
+<br>
+
 # Gobomatic
 
 Gobomatic is a Python library to generate Scratch (3>) projects from
