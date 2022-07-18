@@ -2,7 +2,9 @@
 
 from gobomatic import *
 
-Self = Sprite(name=__name__, costumes=["assets/scratchcat.svg"])
+Self = Sprite(  name = __name__,
+                costumes = ["assets/scratchcat.svg"],
+                sounds = ["assets/audio_mp3.mp3", "assets/audio_wav.wav"],  )
 
 # Variables:
 # --- for all sprites variables ---

@@ -33,12 +33,13 @@ class Sprite:
             sprite: "Sprite",
             args: tuple[primitives.ArgReporter, ...],
             name: str = None,
+            warp: bool = False,
         ):
             self.sprite = sprite
             self.args_length = len(args)
             proccode = primitives.genproccode(name or primitives.blkid(self), args)
             self.prototype = primitives.ProcPrototype(
-                proccode, [arg.name for arg in args]
+                proccode, [arg.name for arg in args], warp
             )
             self.sprite.blocks.append(self.prototype)
 
@@ -66,9 +67,9 @@ class Sprite:
         self.blocks: list[primitives.Block] = []
 
     def Func(
-        self, *args: primitives.ArgReporter, name: str = None
+        self, *args: primitives.ArgReporter, name: str = None, warp: bool = False
     ) -> "Sprite.FuncFactory":
-        return Sprite.FuncFactory(self, args, name)
+        return Sprite.FuncFactory(self, args, name, warp)
 
     def Var(self, name: str = None, value: primitives.ValueType = 0) -> primitives.Var:
         var = primitives.Var(name, value)
@@ -149,7 +150,17 @@ class Sprite:
 
         # TODO
         def sounds():
-            return []
+            return [
+                # {
+                #    "name": filename_from_path(sound),
+                #    "assetId": md5ext(sound),
+                #    "dataFormat": extension_from_path(sound),
+                #    "md5ext": md5ext(sound) + "." + extension_from_path(sound),
+                #    #"rate": sound_samplerate(sound),
+                #    #"sampleCount": sound_samplecount(sound),
+                # }
+                # for sound in self.sounds
+            ]
 
         return {
             "isStage": self.name == "Stage",

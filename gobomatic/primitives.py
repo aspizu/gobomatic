@@ -315,9 +315,10 @@ def genproccode(name: str, args: tuple[ArgReporter, ...]) -> str:
 
 
 class ProcPrototype(Block):
-    def __init__(self, proccode: str, args: list[str]):
+    def __init__(self, proccode: str, args: list[str], warp: bool = False):
         self.proccode = proccode
         self.args = args
+        self.warp = warp
         self.define("procedures_prototype", inputs={arg: [1, arg] for arg in self.args})
 
     def serialize(self):
@@ -329,7 +330,7 @@ class ProcPrototype(Block):
             "argumentids": json.dumps(self.args),
             "argumentdefaults": json.dumps([0] * len(self.args)),
             "argumentnames": json.dumps(self.args),
-            "warp": "true",
+            "warp": "true" if self.warp else "false",
         }
         return ret
 
