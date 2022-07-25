@@ -43,8 +43,12 @@ class Sprite:
             )
             self.sprite.blocks.append(self.prototype)
 
+        def __repr__(self):
+            return f"FuncFactory(prototype={self.prototype}, definition={self.definition})"
+
         def Define(self, *stack: primitives.StatementBlock):
-            self.sprite.blocks.append(primitives.ProcDefinition(self.prototype)(*stack))
+            self.definition = primitives.ProcDefinition(self.prototype)(*stack)
+            self.sprite.blocks.append(self.definition)
             return self
 
         def __call__(self, *args: primitives.InputType) -> primitives.ProcCall:
@@ -142,6 +146,7 @@ class Sprite:
                 {
                     "assetId": md5ext(costume),
                     "name": filename_from_path(costume),
+                    'bitmapResolution': 2,
                     "md5ext": md5ext(costume) + "." + extension_from_path(costume),
                     "dataFormat": extension_from_path(costume),
                 }
