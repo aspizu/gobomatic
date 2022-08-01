@@ -55,7 +55,7 @@ class Sprite:
 
         def __call__(self, *args: primitives.InputType) -> primitives.ProcCall:
             if len(args) != self.args_length:
-                raise Exception(
+                raise TypeError(
                     f"Wrong no of arguments: expected {self.args_length}, got {len(args)}"
                 )
             return primitives.ProcCall(self.prototype, args)
