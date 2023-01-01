@@ -1,9 +1,8 @@
-## NEW
+## Gobomatic is deprecated!
 
 [Goboscript](https://github.com/aspizu/goboscript) is a new way to write Scratch 
 Projects in text form. When it reaches a stable release you may use it over 
-Gobomatic. Goboscript depends on Gobomatic so development will continue on both 
-projects.
+Gobomatic.
 
 <br>
 <br>
